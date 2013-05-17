@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
+    <head>
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+      <link rel="stylesheet" href="index.css" />
+      <script src="../ContactChooser/FlexBox/js/jquery-1.9.1.min.js"></script>
+      <script src="jquery.mobile-1.3.1.min.js"></script>
+      <script src="createproject.js"></script>
+    </head>
+
+<body onload="onLoad()">
+
+  <div data-inset="false" data-theme="a" data-role="page">
+	  <div data-role="content" class="back">
+      <div id="createcard">
+		    <h1>Create a Project</h1>
+          <div class="card" id="CreateProject">
+            <p>Due Date: <input class="datetime" type="datetime-local" id="date"></p>
+            <p>Tasks:</p>
+            <div id="Tasks" style="margin:25px;margin-left: 20px;margin-right:20px;">
+              <ul id="list" data-role="listview">
+
+              </ul>
+            </div>
+            <div>
+              <button id="" onclick="">Add Task</button>
+              <table style="width:100%;">
+                <tr>
+                  <td align="left">
+                    <button styel="float:left;" data-inline="true" onclick="">Cancel</button>
+                  </td>
+                  <td align="right">
+                    <button data-inline="true" style="float: right;" id="fewkfnewf" onclick="">Create</button>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+	      </div>
+      </div>
+    </div>
+</body>
+</html>

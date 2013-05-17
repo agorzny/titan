@@ -1,0 +1,105 @@
+body {
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: fixed;
+}
+
+.wrapper {
+	width: 70%; 
+	height: 100%;
+	margin: 0 auto;
+	color: #0A224E;
+	border: 1px solid red;
+	position: relative;
+	}
+	
+.banner {
+	width: 100%;
+	height: 10%;
+	border: 1px solid red;
+	position: relative;
+	}
+	
+.loginMenu{
+	margin-top: 15%;
+	margin-left: 30%;
+	width: 40%;
+	height: 30%;
+	border: 1px solid red;
+	}
+
+.menuBar{
+	height: 5%;
+	border: 1px solid red;
+	width: 100%;
+	}
+
+#lean_overlay {
+    position: fixed;
+    z-index:100;
+    top: 0px;
+    left: 0px;
+    height:100%;
+    width:100%;
+    background: #000;
+    display: none;
+}	
+
+.modal_close { border: 1px solid red;
+}
+
+ #hello {display: none; position: fixed; opacity: 1; z-index: 11000; left: 50%; margin-left: -202px; top: 200px; }
+
+ .modal {
+
+     width: 30%;
+     padding-bottom: 2px;
+	 height:50%;
+    display:none;
+
+
+    background: #FFF;
+        border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+        box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
+       
+}
+	
+nav {
+		margin: 0 auto;
+		color: #BF381A;
+		text-align: center;
+		font-weight: bold;
+		font-family: Arvo; font-size: 16px; line-height: 24px;
+	}	
+
+nav ul {
+	padding: 0 0px;
+	border-radius: 0px;  
+	list-style: none;
+	position: relative;
+	display: inline-table;
+	margin-top: 0px;
+	width: 100%;
+}
+
+nav ul li {
+		float: left;
+		width: 33%;
+	}
+
+.rightAlign{
+	text-align: right;
+	float: right;
+}
+.centerAlign{
+	text-align: center;
+}
+
+.leftAlign{
+	text-align: left;
+	float: left;
+}
+	
+	
