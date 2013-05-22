@@ -104,13 +104,9 @@ function getEmployeesFromDatabase() //Populates an array of Employees
 
 {
 
-
-
-
-
-
-
 	//Connect to database
+
+  $temp = array();
 
 	connectToDatabase();
 
@@ -118,69 +114,36 @@ function getEmployeesFromDatabase() //Populates an array of Employees
 
 	//perform query
 
-	$query = "SELECT id, firstName, lastName, type FROM employees ORDER BY Name ASC";
+	$query = "SELECT id, firstName, lastName, rank FROM employees ORDER BY lastName ASC";
 
 
 
-			if ($result = mysqli_query($query)) { //if query was successful
+			if ($result = mysql_query($query)) { //if query was successful
 
+          $num=mysql_numrows($result);
+					for($i=0;$i<$num;$i++){
 
+              $id = mysql_result($result,$i,"id");
 
-					$i=0;
+							$firstName = mysql_result($result,$i,"firstName");
 
-					while ($i < $num) //loop through all results from database query
+							$lastName = mysql_result($result,$i,"lastName");
 
-					{
+							$type = mysql_result($result,$i,"rank");
 
-
-
-							//Select row $i
-
-				    	$result->data_seek($i);
-
-
-
-					    //Pull data from row
-
-					    $row = mysqli_fetch_row($result);
-
-
-
-							$id = $row[0];
-
-							$firstName = $row[1];
-
-							$lastName = $row[2];
-
-							$type = $row[3];
-
-
+              $name = $lastName . ", " . $firstName;
 
 							//Add to array
-
-							array_push($employeeArray, "$id", "$firstName", "$lastName", "$type");
-
-
-
-
-
-					    //Free/un-handle reseult set
-
-					    mysqli_free_result($result); //prep for next one
-
-
-
-
-
-					 $i++;
+              $t = array("index"=>"0","id"=>$id,"name"=>$name,"type"=>"person");
+							array_push($temp, $t);
 
 					 }
 
 			}
 
 
-
-			return $employeeArray; //returns employee info as array
+      $employeeArray=$temp;
+			return $temp; //returns employee info as array
 
 
 
@@ -206,81 +169,42 @@ function getDepartmentsFromDatabase() //Populates an array of departments
 
 {
 
-
-
-
-
-
-
 	//Connect to database
-
+  $temp=array();
 	connectToDatabase();
 
 
 
 	//perform query
 
-	$query = "SELECT id, departmentName, type FROM departments ORDER BY departmentName ASC";
+	$query = "SELECT id, deptName FROM department ORDER BY deptName ASC";
 
 
 
-			if ($result = mysqli_query($query)) { //if query was successful
+			if ($result = mysql_query($query)) { //if query was successful
 
 
 
-					$i=0;
+					$num=mysql_numrows($result);
+					for($i=0;$i<$num;$i++){
 
-					while ($i < $num) //loop through all results from database query
+							$id = mysql_result($result,$i,"id");
 
-					{
+							$deptName = mysql_result($result,$i,"deptName");
 
+              $t = array("index"=>"0","id"=>$id,"name"=>$deptName,"type"=>"group");
+							array_push($temp, $t);
 
-
-							//Select row $i
-
-				    	$result->data_seek($i);
-
-
-
-					    //Pull data from row
-
-					    $row = mysqli_fetch_row($result);
-
-
-
-							$id = $row[0];
-
-							$deptName = $row[1];
-
-							$type = $row[2];
-
-
-
-							//Add to array
-
-							array_push($deptArray, "$id", "$deptName", "", "$type");
-
-
-
-
-
-					    //Free/un-handle reseult set
-
-					    mysqli_free_result($result); //prep for next one
-
-
-
-
-
-					 $i++;
 
 					 }
 
-			}
+			}else{
+        return "flag";
+      }
 
 
-
-			return $deptArray; //returns employee info as array
+      $deptArray=$temp;
+			return $temp; //returns employee info as array
 
 
 
@@ -308,9 +232,8 @@ function allContacts() //Returns a list of Employees AND departments as JSON dat
 
 	//Set lists in array
 
-	employeeList();
-
-	departmentList();
+	$e = getEmployeesFromDatabase();
+  $d = getDepartmentsFromDatabase();
 
 
 
@@ -322,9 +245,7 @@ function allContacts() //Returns a list of Employees AND departments as JSON dat
 
 	//Combine the two
 
-	$groupArray = array_merge($groupArray, $employeeArray); //Add Employees
-
-	$groupArray = array_merge($groupArray, $deptArray); //Add departments
+	$groupArray = array_merge($e, $d); //Add departments
 
 
 
@@ -458,7 +379,7 @@ global $returnList;
 
 
 		$id=mysql_result($result,$i,"messageId");
-		
+
 		$returnList[$i][6] = $id;
 
     $status=mysql_result($result,$i,"readStatus");
@@ -492,14 +413,14 @@ global $returnList;
 		$returnList[$i][1] = $text; //Add Message to array
 		$returnList[$i][5] = $thumb; //thumb
 		$returnList[$i][7] = $sender;
-		
+
 
 
  		$query4="SELECT r.employee as reciever FROM recipients as r WHERE r.message=".$id;
 
 		$result4=mysql_query($query4);
-	
-		
+
+
 
 
 		$num2=mysql_numrows($result4);
@@ -515,7 +436,7 @@ global $returnList;
   	  $first2=mysql_result($result5,0,"firstName");
 
      // echo $first2;
-      
+
       $returnList[$i][2] = $first2; //Add receipient(firstname) to array
 
       $query6="SELECT rs.status from readStatus as rs WHERE rs.id=" . $status;
@@ -534,7 +455,7 @@ global $returnList;
 
       }
 
-			
+
     }
 
 	  //echo "<br />";
@@ -623,8 +544,8 @@ $returnUnreadCount = 0;
 		//$returnList[$i][4] = $last; //Add sender (firstname) to array
 		//$returnList[$i][1] = $text; //Add Message to array
 		//$returnList[$i][5] = $thumb; //Add sender (firstname) to array
-		
-		
+
+
 
  		$query4="SELECT r.employee as reciever FROM recipients as r WHERE r.message=".$id;
 
@@ -645,16 +566,16 @@ $returnUnreadCount = 0;
   	  $first2=mysql_result($result5,0,"firstName");
 
      // echo $first2;
-      
+
       //$returnList[$i][2] = $first2; //Add receipient(firstname) to array
 
       $query6="SELECT rs.status from readStatus as rs WHERE rs.id=" . $status;
 
       $result6=mysql_query($query6);
 
-      if(mysql_result($result6,0,"status")==0) 
+      if(mysql_result($result6,0,"status")==0)
       {
-      	
+
       	//$returnList[$i][3] = 0; //Add read flag;
 
     }else{
@@ -669,7 +590,7 @@ $returnUnreadCount = 0;
 
       }
 
-			
+
     }
 
 	  //echo "<br />";
@@ -787,27 +708,27 @@ function getAllMessagesSentBy($sender, $date) //Populates an array of Employees
 
 function getAllFilesByAccessor($accessor, $date, $readStatus) {
 	connectToDatabase();
-	
+
 	global $returnListFiles;
-	
+
 	$query="SELECT f.file as fileID, f.readStatus as readStatusID, f.security as accessorID FROM fileAccess as f WHERE f.security=".$accessor;
 	$result=mysql_query($query);
-	
+
 	$num = mysql_numrows($result);
 
 
-	
+
 	$i=0;
-	
+
 	while($i < $num){
 		$fileID=mysql_result($result, $i, "fileID");
 		$readStatusID=mysql_result($result, $i, "readStatusID");
-		
+
 		$query2="SELECT r.status as ReadStatus FROM readStatus as r WHERE r.id=".$readStatusID;
 		$result2=mysql_query($query2);
 		$status=mysql_result($result2, 0, "ReadStatus");
 		//echo $status, $readStatus;
-		
+
 		if ($status == $readStatus){
 			If ($date !=NULL){
 				$query3="SELECT f.fileName as fileName, f.dateUploaded as fileUploadDate, f.uploader as uploaderID, f.filePath as path, f.id as fileID FROM file as f WHERE f.id=$fileID AND f.dateUploaded < $date";
@@ -815,38 +736,38 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 			else {
 				$query3="SELECT f.fileName as fileName, f.dateUploaded as fileUploadDate, f.uploader as uploaderID, f.filePath as path, f.id as fileID FROM file as f WHERE f.id=$fileID";
 			}
-			
+
 			$result3=mysql_query($query3);
-			
+
 			$fileName=mysql_result($result3, 0, "fileName");
 			$fileDateUploaded=mysql_result($result3, 0, "fileUploadDate");
 			$fileUploaderID=mysql_result($result3, 0, "uploaderID");
 			$filePath=mysql_result($result3, 0, "path");
 			$fileID=mysql_result($result3, 0, "fileID");
-			
+
 			$query4="SELECT f.readStatus as readStatusID, f.security as accessorID FROM fileAccess as f WHERE f.file=".$fileID;
-			$result4=mysql_query($query4);		
+			$result4=mysql_query($query4);
 			$num2=mysql_numrows($result4);
-			
+
 			//echo mysql_result($result4, $j, "readStatusID");
-			
+
 			$j = 0;
-			
+
 			while($j < $num2){
 				$accessors.=getEmployeeName(mysql_result($result4, $j, "accessorID"))." ".getReadStatus2(mysql_result($result4, $j, "readStatusID")).", ";
 				$j++;
 			}
-		
+
 			$returnListFiles[$i][0] = getEmployeeName($fileUploaderID); //UploadedBy - Name
 			$returnListFiles[$i][1] = $fileName; //FileName
 			$returnListFiles[$i][2] = $filePath; //FilePath
 			$returnListFiles[$i][3] = $accessors; //Accessors
 			$returnListFiles[$i][4] = $fileDateUploaded; //Date uploaded
-			
-			
+
+
 			//echo "Uploaded by: ".getEmployeeName($fileUploaderID)."<br /> File Name: ".$filename."<br /> File path: ".$filePath."<br /> To: ".$accessors."<br /><br />";
 		}
-		$accessors="";	
+		$accessors="";
 		$i++;
 	}
 }
@@ -858,7 +779,7 @@ function getReadStatus2($readStatusID) {
 	$readStatus=mysql_result($result, 0, "status");
 	if ($readStatus == 0){
 		return "(unseen)";}
-	else{ 
+	else{
 		return " (seen) ";
 	}
 }
@@ -881,9 +802,9 @@ global $returnCoworkers;
 		$query2="SELECT  e.id, e.firstName as firstName,  e.lastName as lastName, e.thumb as thumb, d.dept, d.employee, d2.deptName FROM employees e, employeeDept d, department d2 WHERE (e.id = d.employee) AND (d.dept= d2.id) AND (e.id <>".$employeedID.")";
 		$result2=mysql_query($query2);
 		//$deptID=mysql_result($result2,0,"dept"); //Dept ID
-	
 
-	
+
+
 		$num = mysql_numrows($result2);
 
 		$t=0;

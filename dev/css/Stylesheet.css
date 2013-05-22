@@ -7,21 +7,21 @@ body {
 }
 
 .wrapper {
-	width: 70%; 
+	width: 70%;
 	height: 100%;
 	margin: 0 auto;
 	color: #0A224E;
 	border: 1px solid red;
 	position: relative;
 	}
-	
+
 .banner {
 	width: 100%;
 	height: 10%;
 	border: 1px solid red;
 	position: relative;
 	}
-	
+
 .loginMenu{
 	margin-top: 15%;
 	margin-left: 30%;
@@ -45,7 +45,7 @@ body {
     width:100%;
     background: #000;
     display: none;
-}	
+}
 
 .modal_close { border: 1px solid red;
 }
@@ -64,8 +64,8 @@ body {
     background: #202020;
         border-radius: 0px; -moz-border-radius: 0px; -webkit-border-radius: 0px;
         box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
-       
-       
+
+
 
 }
 
@@ -80,8 +80,13 @@ body {
     background: #202020;
         border-radius: 0px; -moz-border-radius: 0px; -webkit-border-radius: 0px;
         box-shadow: 0px 0px 4px rgba(0,0,0,0.7); -webkit-box-shadow: 0 0 4px rgba(0,0,0,0.7); -moz-box-shadow: 0 0px 4px rgba(0,0,0,0.7);
-      
 
+
+}
+
+.modalTask{
+  width: 400px;
+  height: 350px;
 }
 
 .modalInset{
@@ -90,34 +95,34 @@ body {
 			  background-color: #fff;
 			    background-position: center center;
   		background-repeat: no-repeat;
-			
+
 			  /* Safari 4-5, Chrome 1-9 */
 			  /* Can't specify a percentage size? Laaaaaame. */
 			  background: -webkit-gradient(radial, center center, 0, center center, 460, from(#fff), to(#fffdc0));
-			
+
 			  /* Safari 5.1+, Chrome 10+ */
 			  background: -webkit-radial-gradient(circle, #fff, #fffdc0);
-			
+
 			  /* Firefox 3.6+ */
 			  background: -moz-radial-gradient(circle, #fff, #fffdc0);
-			
+
 			  /* IE 10 */
 			  background: -ms-radial-gradient(circle, #fff, #fffdc0);
 
 }
 
-	
+
 nav {
 		margin: 0 auto;
 		color: #BF381A;
 		text-align: center;
 		font-weight: bold;
 		font-family: Arvo; font-size: 16px; line-height: 24px;
-	}	
+	}
 
 nav ul {
 	padding: 0 0px;
-	border-radius: 0px;  
+	border-radius: 0px;
 	list-style: none;
 	position: relative;
 	display: inline-table;
@@ -142,5 +147,44 @@ nav ul li {
 	text-align: left;
 	float: left;
 }
-	
-	
+
+.contactBubble{
+  height: 16px;
+  display: inline-block;
+  padding-left:4px;
+  padding-right:2px;
+  background-color:#FFFFFF;
+  color:#000000;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  text-align:center;
+  margin:2px;
+}
+
+.contactText{
+  font-size: 10px;
+}
+
+.remove{
+  border:0px;
+  width:12px;
+  height:12px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  background-color:#444444;
+  color:white;
+  text-align:center;
+  font-size:8px;
+  margin:2px;
+  margin-left:4px;
+  padding:1px;
+
+}
+
+.remove:hover{
+  background-color: rgba(170,25,0,1);
+}
+
+::-webkit-inner-spin-button { display: none; }
+::-webkit-calendar-picker-indicator { background: transparent; }
+
