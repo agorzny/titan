@@ -228,7 +228,30 @@ function createEmployee($username, $first, $last, $email, $phone, $thumb, $depts
 }
 
 
+function addFile($fileName, $fileDateUploaded, $uploaderID, $filePath, &$accessors) {
 
+	mysql_connect("localhost", "thevoidc_cti", "cti2013") or die(mysql_error());
+	mysql_select_db("thevoidc_titan") or die(mysql_error());
+
+	$query="INSERT INTO file (fileName, dateUploaded, uploader, filePath) VALUES ('".$fileName."', '".$fileDateUploaded."', '".$uploaderID."', '".$filePath."')";
+	echo "add: ".$query ."<br />";
+	mysql_query($query);
+	$fileID = mysql_insert_id();
+
+	echo "size of accessors: ".sizeof($accessors)."<br />";
+
+	for ($i=0; $i<sizeof($accessors);$i++){
+		$query2="INSERT INTO readStatus (status, dateRead, readType) VALUES ('0', '".$fileDateUploaded."', '1')";
+		mysql_query($query2);
+
+		$readStatusID=mysql_insert_id();
+
+		$query3="INSERT INTO fileAccess (file, security, readStatus) VALUES('".$fileID."', '".$accessors[$i]."', '".$readStatusID."')";
+		echo "File Access : ".$query3."<br />";
+		mysql_query($query3);
+	}
+
+}
 
 
 
