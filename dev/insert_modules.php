@@ -105,12 +105,12 @@
     connectToDatabase();
     $query='INSERT INTO task (taskName,taskDesc,startDate, endDate, completeDate, assignor, status) VALUES ("'.
       $name.'","'.$desc.'","'.$start.'","'.$due.'","'.$complete.'","'.$assignor.'","'.$status.'")';
-    //echo "Query: ".$query."<br/>";
+    echo "Query: ".$query."<br/>";
 		$result=mysql_query($query);
     $query2="SELECT LAST_INSERT_ID()";
     $result2=mysql_query($query2);
     $id=mysql_result($result2,0);
-    //echo "New task id: " . $id . "<br/>";
+    echo "New task id: " . $id . "<br/>";
     return $id;
   }
 
@@ -134,7 +134,9 @@
   // $employees: array of employee id's who the task is assigned to
   function createTask($name,$desc,$start,$due, $assignor, $employees){
     connectToDatabase();
+    echo "Creating Task...<br/>";
     $task = addTask($name,$desc,$start,$due, $assignor);
+    echo "Task: ".$task;
     foreach($employees as $e){
       addEmployeeTask($task,$e);
     }

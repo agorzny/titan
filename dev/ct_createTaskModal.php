@@ -2,7 +2,7 @@
 		<h1>Create a Task</h1>
 		<form method="POST" action="ct_createTask.php">
     <input id="data" name="data" type="hidden" value="">
-    <input id="current" name="current" type="hidden" value='"'<? echo $_SESSION['userId']; ?>'"'>
+    <input id="current" name="current" type="hidden" value='<? echo $_SESSION['userId']; ?>'>
 			<table border="0">
 				<tr>
 					<td><p> Task Title: </p></td>

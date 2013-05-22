@@ -455,7 +455,7 @@ global $returnList;
 
 		$id=mysql_result($result,$i,"messageId");
 
-		
+
 
 		$returnList[$i][6] = $id;
 
@@ -523,7 +523,7 @@ global $returnList;
 
 		$returnList[$i][7] = $sender;
 
-		
+
 
 
 
@@ -535,9 +535,9 @@ global $returnList;
 
 		$result4=mysql_query($query4);
 
-	
 
-		
+
+
 
 
 
@@ -569,7 +569,7 @@ global $returnList;
 
      // echo $first2;
 
-      
+
 
       $returnList[$i][2] = $first2; //Add receipient(firstname) to array
 
@@ -607,7 +607,7 @@ global $returnList;
 
 
 
-			
+
 
     }
 
@@ -785,9 +785,9 @@ $returnUnreadCount = 0;
 
 		//$returnList[$i][5] = $thumb; //Add sender (firstname) to array
 
-		
 
-		
+
+
 
 
 
@@ -829,7 +829,7 @@ $returnUnreadCount = 0;
 
      // echo $first2;
 
-      
+
 
       //$returnList[$i][2] = $first2; //Add receipient(firstname) to array
 
@@ -843,11 +843,11 @@ $returnUnreadCount = 0;
 
 
 
-      if(mysql_result($result6,0,"status")==0) 
+      if(mysql_result($result6,0,"status")==0)
 
       {
 
-      	
+
 
       	//$returnList[$i][3] = 0; //Add read flag;
 
@@ -877,7 +877,7 @@ $returnUnreadCount = 0;
 
 
 
-			
+
 
     }
 
@@ -1113,27 +1113,27 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 	connectToDatabase();
 
-	
+
 
 	global $returnListFiles;
 
-	
+
 
 	$query="SELECT f.file as fileID, f.readStatus as readStatusID, f.security as accessorID FROM fileAccess as f WHERE f.security=".$accessor;
 
 	$result=mysql_query($query);
 
-	
+
 
 	$num = mysql_numrows($result);
 
-	
+
 
 	$i=0;
 
 	$k=0;
 
-	
+
 
 	while($i < $num){
 
@@ -1141,7 +1141,7 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 		$readStatusID=mysql_result($result, $i, "readStatusID");
 
-		
+
 
 		$query2="SELECT r.status as ReadStatus FROM readStatus as r WHERE r.id=".$readStatusID;
 
@@ -1149,13 +1149,13 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 		$status=mysql_result($result2, 0, "ReadStatus");
 
-		
 
-		
 
-		
 
-		
+
+
+
+
 
 		if ($status == $readStatus){
 
@@ -1173,11 +1173,11 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 			}
 
-			
+
 
 			$result3=mysql_query($query3);
 
-			
+
 
 			$fileName=mysql_result($result3, 0, "fileName");
 
@@ -1189,23 +1189,23 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 			$fileID=mysql_result($result3, 0, "fileID");
 
-			
+
 
 			$query4="SELECT f.readStatus as readStatusID, f.security as accessorID FROM fileAccess as f WHERE f.file=".$fileID;
 
-			$result4=mysql_query($query4);		
+			$result4=mysql_query($query4);
 
 			$num2=mysql_numrows($result4);
 
-			
+
 
 			//echo mysql_result($result4, $j, "readStatusID");
 
-			
+
 
 			$j = 0;
 
-			
+
 
 			while($j < $num2){
 
@@ -1215,7 +1215,7 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 			}
 
-      
+
 
 			$returnListFiles[$k][0] = getEmployeeName($fileUploaderID); //UploadedBy - Name
 
@@ -1227,7 +1227,7 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 			$returnListFiles[$k][4] = $fileDateUploaded; //Date uploaded
 
-			
+
 
 			$k++;
 
@@ -1235,7 +1235,7 @@ function getAllFilesByAccessor($accessor, $date, $readStatus) {
 
 		}
 
-		$accessors="";	
+		$accessors="";
 
 		$i++;
 
@@ -1261,7 +1261,7 @@ function getReadStatus2($readStatusID) {
 
 		return " (unseen) ";}
 
-	else{ 
+	else{
 
 		return " (seen) using a ".getDevice(1, $device);
 
@@ -1307,11 +1307,11 @@ global $returnCoworkers;
 
 		//$deptID=mysql_result($result2,0,"dept"); //Dept ID
 
-	
 
 
 
-	
+
+
 
 		$num = mysql_numrows($result2);
 
@@ -1361,21 +1361,21 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 	connectToDatabase();
 
-	
+
 
 	$query="SELECT a.event as eventID, a.employee as employeeID, a.readStatus as readStatusID FROM attendees as a WHERE a.employee=".$attendeeID;
 
 	$result=mysql_query($query);
 
-	
+
 
 	$num=mysql_numrows($result);
 
-	
+
 
 	$i=0;
 
-	
+
 
 	while($i < $num){
 
@@ -1383,7 +1383,7 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 		$readStatusID=mysql_result($result, $i, "readStatusID");
 
-		
+
 
 		$query2="SELECT r.status as ReadStatus FROM readStatus as r WHERE r.id=".$readStatusID;
 
@@ -1391,11 +1391,11 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 		$status=mysql_result($result2, 0, "ReadStatus");
 
-		
+
 
 		//echo $status.$readStatus;
 
-		
+
 
 		if ($status == $readStatus){
 
@@ -1407,11 +1407,11 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 			$query3="SELECT e.id as eventID, e.title as eventTitle, e.eventDesc as eventDesc, e.location as eventLocation, e.creator as eventCreator, e.dateOfEvent as eventDate FROM event as e WHERE e.id=$eventID";}
 
-		
+
 
 			$result3=mysql_query($query3);
 
-			
+
 
 			$eventTitle=mysql_result($result3, 0, "eventTitle");
 
@@ -1425,19 +1425,19 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 			$eventDate=mysql_result($result3, 0, "eventDate");
 
-			
+
 
 			$query4 = "SELECT a.employee as attendee, a.readStatusID as readStatusID From attendees as a WHERE a.event=".$eventID;
 
-			$result4=mysql_query($query4);		
+			$result4=mysql_query($query4);
 
 			$num2=mysql_numrows($result4);
 
-			
+
 
 			$j = 0;
 
-			
+
 
 			while($j < $num2){
 
@@ -1447,19 +1447,19 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 			}
 
-		
+
 
 			echo "From: ".getEmployeeName($eventCreatorID)."<br /> Title: ".$eventTitle."<br /> Description: ".$eventDesc."<br /> Location: ".$eventLocation."<br /> To: ".$attendees."<br /><br />";
 
-			
+
 
 		}
 
-		
+
 
 		$attendees="";
 
-		
+
 
 		$i++;
 
@@ -1472,11 +1472,11 @@ function getAllEventsByAttendee($attendeeID, $date, $readStatus){
 
 function getAllFilesByUploader($uploaderID, $date){
 
-	
+
 
 	connectToDatabase();
 
-	
+
 
 	If ($date !=NULL){
 
@@ -1490,23 +1490,23 @@ function getAllFilesByUploader($uploaderID, $date){
 
 		}
 
-	
+
 
 	$result = mysql_query($query);
 
-	
+
 
 	$num = mysql_numrows($result);
 
-	
 
 
 
-	
+
+
 
 	$i=0;
 
-	
+
 
 	while($i < $num){
 
@@ -1520,35 +1520,35 @@ function getAllFilesByUploader($uploaderID, $date){
 
 		$fileID=mysql_result($result, $i, "fileID");
 
-		
 
 
 
-		
+
+
 
 		$query2="SELECT f.security as accessorID, f.readStatus as readStatusID FROM fileAccess as f WHERE f.file=".$fileID;
 
-		
 
 
 
-		
+
+
 
 		$result2=mysql_query($query2);
 
-		
+
 
 		$num2=mysql_numrows($result2);
 
-		
+
 
 		$j = 0;
 
-		
 
 
 
-		
+
+
 
 		while($j < $num2){
 
@@ -1558,11 +1558,11 @@ function getAllFilesByUploader($uploaderID, $date){
 
 		}
 
-		
 
-		
 
-		
+
+
+
 
 		echo "Uploaded by: ".getEmployeeName($fileUploaderID)."<br /> File Name: ".$fileName."<br /> File path: ".$filePath."<br /> To: ".$accessors."<br /><br />";
 
@@ -1570,11 +1570,11 @@ function getAllFilesByUploader($uploaderID, $date){
 
 		$i++;
 
-		
+
 
 	}
 
-	
+
 
 }
 
@@ -1584,7 +1584,7 @@ function getAllEventsByCreator($creatorID, $date){
 
 	connectToDatabase();
 
-	
+
 
 	If ($date != NULL){
 
@@ -1594,19 +1594,19 @@ function getAllEventsByCreator($creatorID, $date){
 
 		$query="SELECT e.id as eventID, e.title as eventTitle, e.eventDesc as eventDesc, e.location as eventLocation, e.creator as eventCreator, e.dateOfEvent as eventDate FROM event as e WHERE e.creator=$creatorID";}
 
-		
+
 
 	$result=mysql_query($query);
 
-	
+
 
 	$num=mysql_numrows($result);
 
-	
+
 
 	$i=0;
 
-	
+
 
 	while($i < $num){
 
@@ -1622,11 +1622,11 @@ function getAllEventsByCreator($creatorID, $date){
 
 		$eventDate=mysql_result($result, $i, "eventDate");
 
-		
+
 
 		$query2 = "SELECT a.employee as attendee, a.readStatus as readStatusID From attendees as a WHERE a.event=".$eventID;
 
-		$result2=mysql_query($query2);		
+		$result2=mysql_query($query2);
 
 		$num2=mysql_numrows($result2);
 
@@ -1634,7 +1634,7 @@ function getAllEventsByCreator($creatorID, $date){
 
 		$j = 0;
 
-			
+
 
 		while($j < $num2){
 
@@ -1644,7 +1644,7 @@ function getAllEventsByCreator($creatorID, $date){
 
 		}
 
-		
+
 
 		echo "From: ".getEmployeeName($eventCreatorID)."<br /> Title: ".$eventTitle."<br /> Description: ".$eventDesc."<br /> Location: ".$eventLocation."<br /> To: ".$attendees."<br /><br />";
 
@@ -1666,37 +1666,37 @@ function getConvo($messageID, $numOfMessages) //Populates an array of Employees
 
 	connectToDatabase();
 
-	
+
 
 	$query="SELECT m.conversationId as threadID FROM message as m WHERE m.id=".$messageID;
 
-	 	 
+
 
 	$result=mysql_query($query);
 
-	
+
 
 	$threadID=mysql_result($result, 0, "threadID");
 
-	
 
-	$query2="SELECT m.id as messageID, m.sender as Sender, m.dateSent as dateSent, m.message as message, m.device as device 
 
-	FROM message as m 
+	$query2="SELECT m.id as messageID, m.sender as Sender, m.dateSent as dateSent, m.message as message, m.device as device
 
-	WHERE m.id=".$threadID." OR m.conversationId=".$threadID; 
+	FROM message as m
 
-	
+	WHERE m.id=".$threadID." OR m.conversationId=".$threadID;
+
+
 
 	$result2=mysql_query($query2);
 
-	
+
 
 	$num=mysql_numrows($result2);
 
-		
 
-			
+
+
 
 		$i=0;
 
@@ -1714,21 +1714,21 @@ function getConvo($messageID, $numOfMessages) //Populates an array of Employees
 
 			$device=mysql_result($result2, $i, "device");
 
-		
+
 
 			$query3="SELECT r.employee as recip, r.readStatus as readStatusID FROM recipients as r WHERE r.message=".$messageID;
 
-			$result3=mysql_query($query3);		
+			$result3=mysql_query($query3);
 
-			
+
 
 			$num2=mysql_numrows($result3);
 
-			
+
 
 			$j=0;
 
-			
+
 
 			while($j < $num2){
 
@@ -1736,21 +1736,21 @@ function getConvo($messageID, $numOfMessages) //Populates an array of Employees
 
 				$j++;
 
-							
+
 
 			}
 
-				
+
 
 			echo "From: ".getEmployeeName($sender)." sent using ".getDevice(1, $device)."<br /> Message: ".$message."<br /> To: ".$recip."<br /><br />";
 
-				
+
 
 			$i++;
 
 		}
 
-	
+
 
 }
 
@@ -1766,7 +1766,7 @@ function getDevice($read, $device){
 
 		}
 
-		else { 
+		else {
 
 			return "computer";
 
@@ -1784,33 +1784,33 @@ function deleteFile($fileName) {
 
 	mysql_select_db("thevoidc_titan") or die(mysql_error());
 
-	
 
-	
+
+
 
 	$query="SELECT f.id as fileID FROM file as f WHERE f.fileName='".$fileName."'";
 
 	$result=(mysql_query($query));
 
-	
+
 
 	$fileID=mysql_result($result, 0, "fileID");
 
-	
+
 
 	$query2="SELECT f.readStatus as readStatusID, f.id as fileAccessID FROM fileAccess as f WHERE f.file=".$fileID;
 
 	$result2=mysql_query($query2);
 
-	
+
 
 	$num=mysql_numrows($result2);
 
-	
+
 
 	$i=0;
 
-	
+
 
 	while($i<$num){
 
@@ -1818,13 +1818,13 @@ function deleteFile($fileName) {
 
 		$readStatusID=mysql_result($result2, $i, "readStatusID");
 
-		
+
 
 		$query3="DELETE FROM fileAccess WHERE fileAccess.id=".$fileAccessID;
 
 		mysql_query($query3);
 
-		
+
 
 		$query4="DELETE FROM readStatus WHERE readStatus.id=".$readStatusID;
 
@@ -1834,9 +1834,9 @@ function deleteFile($fileName) {
 
 	}
 
-	
 
-	
+
+
 
 	$query5="DELETE FROM file WHERE file.fileName='".$fileName."'";
 
@@ -1868,7 +1868,7 @@ function updateFileSeenStatus($personID, $fileName, $modeOfAccess){
 
 	connectToDatabase();
 
-		
+
 
 	$query="SELECT f.id as fileID FROM file as f WHERE f.fileName='".$fileName."'";
 
@@ -1876,33 +1876,33 @@ function updateFileSeenStatus($personID, $fileName, $modeOfAccess){
 
 	$fileID=mysql_result($result, 0, "fileID");
 
-	
+
 
 	echo $fileID."<br />";
 
-	
+
 
 	$query2="SELECT f.readStatus as readStatusID FROM fileAccess as f WHERE f.security=".$personID." AND f.file=".$fileID;
 
 	$result2=mysql_query($query2);
 
-	
+
 
 	$readStatusID=mysql_result($result2, 0, "readStatusID");
 
-	
 
-	$query3="UPDATE readStatus 
 
-	SET status=1, dateRead=".currentDate().", readType=".$modeOfAccess." 
+	$query3="UPDATE readStatus
+
+	SET status=1, dateRead=".currentDate().", readType=".$modeOfAccess."
 
 	WHERE readStatus.id=".$readStatusID;
 
-	
+
 
 	mysql_query($query3);
 
-	
+
 
 }
 

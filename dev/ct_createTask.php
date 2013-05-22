@@ -1,26 +1,45 @@
 <?
 
-  include 'insert_modules.php';
-  include 'titan.php';
+  require_once('insert_modules.php');
+  require_once('titan.php');
+  require_once('modules.php');
 
   $json = $_POST['data'];
   $data = json_decode(str_replace("\\","", $json),true);
-
-  echo "Title: ".$_POST['taskTitle'];
-  echo "<br/>";
-
-  foreach($data as $i){
-    echo "  Assignee: ".$i['name'];
-    echo "<br/>";
-  }
-  echo "Due: ".$_POST['taskWhen'];
-  echo "<br/>";
-  echo "Description: ".$_POST['message'];
-
 
   $title = $_POST['taskTitle'];
   $desc = $_POST['message'];
   $date = $_POST['taskWhen'];
   $assignor = $_POST['current'];
-  $start
+  $start = currentDate();
+  $employees = array();
+
+  foreach($data as $i){
+    if($i['type']=='person'){
+      array_push($employees,$i['id']);
+    }else{
+      $result = getEmployeesInDepartment($i['id']);
+      $num=mysql_numrows($result);
+		  for($j=0;$j<$num;$j++){
+				array_push($employees, mysql_result($result,$j,'employee'));
+      }
+    }
+  }
+
+
+  echo 'Title: ' . $title . '<br/>';
+  echo 'Assignor: ' . $assignor . '<br/>';
+  echo 'Due: ' . $date . '<br/>';
+  echo 'Description: ' . $desc . '<br/>';
+  echo 'Start: ' . $start . '<br/>';
+  foreach($employees as $i){
+    echo 'Assigned to: ' . $i . '<br/>';
+  }
+
+  createTask($title,$desc,$start,$due,$assignor,$employees);
+
+
 ?>
+<script>
+  window.location="index.php";
+</script>
