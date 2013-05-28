@@ -1,0 +1,17 @@
+	<div id="createModal" class="modal">
+	<h1>Create a Message</h1>
+      <div id="CreateMessage" class="card">
+
+        <table width="90%">
+          <tr><td style="width:1%;">
+            <p>To:  </p>
+          </td><td width="90%">
+            <div id="dropdown"></div>
+          </td></tr>
+        </table>
+        <input type="text" id="sendlist" style="width: 95%;">
+        <textarea  id="message" style="width: 95%;" rows="5"></textarea>
+        <br>
+        <button id="cancel" onclick="">Cancel</button>
+        <button style="float: right;" id="send" onclick="">Send</button>
+      </div>

@@ -162,7 +162,7 @@ a.linkButton{
 
 }
 
-.inboxItem{
+inboxItem{
 	font-family: arial;
 	text-decoration: none;
 	color: #6d6d6d;
