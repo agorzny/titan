@@ -1,0 +1,24 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Home Page</title>
+<link href="css/StyleSheet_Employee_CT.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+
+	<a><img src="CT-Toronto-1.png" style="position:absolute; top:0%; left:0%; max-width:!important"/></a>
+
+    <div id="container">
+            <div id="header_img">
+                <a><img src="img/header_image.jpg" style="position:absolute; top:0%; max-width:!important"/></a>
+            </div>
+            
+            <div  class="feed_box" id="modalInset"></div>
+            
+         	<div class="msg_bar"></div>    
+            
+	</div>
+
+</body>
+</html>
